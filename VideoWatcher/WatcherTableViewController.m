@@ -7,8 +7,16 @@
 //
 
 #import "WatcherTableViewController.h"
+#import "TFHpple.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "Video.h"
+
 
 @interface WatcherTableViewController ()
+
+@property Video *video;
+@property (strong, nonatomic) AppDelegate *appD;
 
 @end
 
@@ -17,16 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.appD = [[AppDelegate alloc] init];
+    [self parse];
 }
 
 #pragma mark - Table view data source
@@ -34,7 +34,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,6 +52,55 @@
     return cell;
 }
 */
+
+- (void)parse
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.youtube.com/channel/UCtxxJi5P0rk6rff3_dCfQVw"]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         TFHpple *parser = [[TFHpple alloc] initWithHTMLData:responseObject];
+         
+         NSString *pathQueryString = @"//div[@class='yt-lockup-content']";
+         
+         NSArray *nodes = [parser searchWithXPathQuery:pathQueryString];
+         
+         for (TFHppleElement *elements in nodes)
+         {
+             self.video = [NSEntityDescription insertNewObjectForEntityForName:@"Video"
+                                                       inManagedObjectContext:self.appD.managedOC];
+             
+             TFHppleElement *element;
+             NSString *test = [[[elements firstChildWithClassName:@"yt-lockup-title"]firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
+             
+      /*       self.news.title = [[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"].text;
+             
+             self.news.date = [[element firstChildWithClassName:@"topic-header"] firstChildWithTagName:@"time"].text;
+             
+             self.news.image = [[[[elements firstChildWithClassName:@"preview"] firstChildWithTagName:@"a"] firstChildWithTagName:@"img"] objectForKey:@"src"];
+             
+             self.news.reference = [[[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"] objectForKey:@"href"];
+             
+             [self.newsContent addObject:self.news];*/
+             NSLog(@"%@", test);
+         }
+         
+    //     [self.tableView reloadData];
+    //     [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
+         
+     }
+                                     failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"%@", error.localizedDescription);
+     }];
+    
+    [operation start];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
