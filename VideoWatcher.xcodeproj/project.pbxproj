@@ -11,10 +11,11 @@
 		61E434BB1B0998A7003F2C0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434BA1B0998A7003F2C0D /* AppDelegate.m */; };
 		61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61E434BC1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld */; };
 		61E434C11B0998A7003F2C0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434C01B0998A7003F2C0D /* ViewController.m */; };
-		61E434C41B0998A7003F2C0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E434C21B0998A7003F2C0D /* Main.storyboard */; };
 		61E434C61B0998A7003F2C0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E434C51B0998A7003F2C0D /* Images.xcassets */; };
 		61E434C91B0998A7003F2C0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61E434C71B0998A7003F2C0D /* LaunchScreen.xib */; };
 		61E434D51B0998A7003F2C0D /* VideoWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434D41B0998A7003F2C0D /* VideoWatcherTests.m */; };
+		61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434DF1B099929003F2C0D /* WatcherTableViewController.m */; };
+		61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61E434E01B099929003F2C0D /* WatcherTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +37,14 @@
 		61E434BD1B0998A7003F2C0D /* VideoWatcher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoWatcher.xcdatamodel; sourceTree = "<group>"; };
 		61E434BF1B0998A7003F2C0D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		61E434C01B0998A7003F2C0D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		61E434C31B0998A7003F2C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		61E434C51B0998A7003F2C0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		61E434C81B0998A7003F2C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		61E434CE1B0998A7003F2C0D /* VideoWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E434D31B0998A7003F2C0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61E434D41B0998A7003F2C0D /* VideoWatcherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoWatcherTests.m; sourceTree = "<group>"; };
+		61E434DE1B099929003F2C0D /* WatcherTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherTableViewController.h; sourceTree = "<group>"; };
+		61E434DF1B099929003F2C0D /* WatcherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherTableViewController.m; sourceTree = "<group>"; };
+		61E434E01B099929003F2C0D /* WatcherTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +90,13 @@
 				61E434BA1B0998A7003F2C0D /* AppDelegate.m */,
 				61E434BF1B0998A7003F2C0D /* ViewController.h */,
 				61E434C01B0998A7003F2C0D /* ViewController.m */,
-				61E434C21B0998A7003F2C0D /* Main.storyboard */,
 				61E434C51B0998A7003F2C0D /* Images.xcassets */,
 				61E434C71B0998A7003F2C0D /* LaunchScreen.xib */,
 				61E434BC1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld */,
 				61E434B51B0998A7003F2C0D /* Supporting Files */,
+				61E434DE1B099929003F2C0D /* WatcherTableViewController.h */,
+				61E434DF1B099929003F2C0D /* WatcherTableViewController.m */,
+				61E434E01B099929003F2C0D /* WatcherTableViewController.xib */,
 			);
 			path = VideoWatcher;
 			sourceTree = "<group>";
@@ -202,9 +207,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61E434C41B0998A7003F2C0D /* Main.storyboard in Resources */,
 				61E434C91B0998A7003F2C0D /* LaunchScreen.xib in Resources */,
 				61E434C61B0998A7003F2C0D /* Images.xcassets in Resources */,
+				61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61E434BB1B0998A7003F2C0D /* AppDelegate.m in Sources */,
+				61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */,
 				61E434B81B0998A7003F2C0D /* main.m in Sources */,
 				61E434C11B0998A7003F2C0D /* ViewController.m in Sources */,
 				61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */,
@@ -248,14 +254,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		61E434C21B0998A7003F2C0D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				61E434C31B0998A7003F2C0D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		61E434C71B0998A7003F2C0D /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
