@@ -75,9 +75,11 @@
                                                        inManagedObjectContext:self.appD.managedOC];
              
              TFHppleElement *element;
-             NSString *name = [[[elements firstChildWithClassName:@"yt-lockup-title"]firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
+             NSString *name = [[[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
              
-             NSString *descript = [[elements firstChildWithClassName:@"yt-lockup-byline"]firstChildWithTagName:@"a"].text;
+             NSString *descript = [[elements firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
+             
+             NSString *time = [[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithTagName:@"span"].text;
              
         //      NSString *descript = [[[elements firstChildWithClassName:@"yt-lockup-byline"]firstChildWithClassName:@"g-hovercard yt-uix-sessionlink yt-user-name  spf-link "] objectForKey:@"aria-label"];
              
@@ -90,7 +92,7 @@
              self.news.reference = [[[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"] objectForKey:@"href"];
              
              [self.newsContent addObject:self.news];*/
-             NSLog(@"%@, %@", name, descript);
+             NSLog(@"%@", time);
          }
          
     //     [self.tableView reloadData];
