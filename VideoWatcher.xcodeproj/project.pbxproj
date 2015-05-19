@@ -18,6 +18,8 @@
 		61E434D51B0998A7003F2C0D /* VideoWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434D41B0998A7003F2C0D /* VideoWatcherTests.m */; };
 		61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434DF1B099929003F2C0D /* WatcherTableViewController.m */; };
 		61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61E434E01B099929003F2C0D /* WatcherTableViewController.xib */; };
+		61EBFAC51B0AF56400AC5267 /* WatcherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */; };
+		61EBFAC61B0AF56400AC5267 /* WatcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		61E434DE1B099929003F2C0D /* WatcherTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherTableViewController.h; sourceTree = "<group>"; };
 		61E434DF1B099929003F2C0D /* WatcherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherTableViewController.m; sourceTree = "<group>"; };
 		61E434E01B099929003F2C0D /* WatcherTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherTableViewController.xib; sourceTree = "<group>"; };
+		61EBFAC21B0AF56400AC5267 /* WatcherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherTableViewCell.h; sourceTree = "<group>"; };
+		61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherTableViewCell.m; sourceTree = "<group>"; };
+		61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherTableViewCell.xib; sourceTree = "<group>"; };
 		6DBF4CBA066676DA831BFE1B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E121A0544C29D9EA47135A81 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6770D2D0739F7D2CD6D01D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +111,9 @@
 				61E434DE1B099929003F2C0D /* WatcherTableViewController.h */,
 				61E434DF1B099929003F2C0D /* WatcherTableViewController.m */,
 				61E434E01B099929003F2C0D /* WatcherTableViewController.xib */,
+				61EBFAC21B0AF56400AC5267 /* WatcherTableViewCell.h */,
+				61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */,
+				61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */,
 				6153C6051B09EDE60018FD43 /* Video.h */,
 				6153C6061B09EDE60018FD43 /* Video.m */,
 				61E434B51B0998A7003F2C0D /* Supporting Files */,
@@ -240,6 +248,7 @@
 			files = (
 				61E434C91B0998A7003F2C0D /* LaunchScreen.xib in Resources */,
 				61E434C61B0998A7003F2C0D /* Images.xcassets in Resources */,
+				61EBFAC61B0AF56400AC5267 /* WatcherTableViewCell.xib in Resources */,
 				61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +306,7 @@
 				6153C6071B09EDE60018FD43 /* Video.m in Sources */,
 				61E434C11B0998A7003F2C0D /* ViewController.m in Sources */,
 				61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */,
+				61EBFAC51B0AF56400AC5267 /* WatcherTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

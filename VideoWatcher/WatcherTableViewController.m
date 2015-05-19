@@ -11,47 +11,86 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "Video.h"
+#import "WatcherTableViewCell.h"
 
 
 @interface WatcherTableViewController ()
 
 @property Video *video;
 @property (strong, nonatomic) AppDelegate *appD;
+@property (strong, nonatomic) NSMutableArray *contentVideo;
 
 @end
 
 @implementation WatcherTableViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self)
+    {
+    self.contentVideo = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"Видео";
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"WatcherTableViewCell" bundle:nil] forCellReuseIdentifier:@"id"];
     
     self.appD = [[AppDelegate alloc] init];
     [self parse];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.video = [NSEntityDescription insertNewObjectForEntityForName:@"Video"
+                                               inManagedObjectContext:self.appD.managedOC];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.contentVideo.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
     
+    if (cell == nil)
+    {
+        cell = [[WatcherTableViewCell alloc] init]; // or your custom initialization
+    }
+    
+    self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    
+    [cell.nameCell setText:self.video.name];
+    [cell.descriptCell setText:self.video.descript];
+    [cell.timeCell setText:self.video.time];
+//    cell.timeCell.text = [self.news.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
+ //   NSLog(@"%@", self.video.poster);
     // Configure the cell...
     
     return cell;
 }
-*/
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 147;
+}
 
 - (void)parse
 {
@@ -65,7 +104,7 @@
      {
          TFHpple *parser = [[TFHpple alloc] initWithHTMLData:responseObject];
          
-         NSString *pathQueryString = @"//div[@class='yt-lockup-content']";
+         NSString *pathQueryString = @"//div[@class='yt-lockup-dismissable']";
          
          NSArray *nodes = [parser searchWithXPathQuery:pathQueryString];
          
@@ -75,15 +114,14 @@
                                                        inManagedObjectContext:self.appD.managedOC];
              
              TFHppleElement *element;
-             NSString *name = [[[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
              
-             NSString *descript = [[elements firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
+             self.video.name = [[[[elements firstChildWithClassName:@"yt-lockup-content"]firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
+             self.video.descript = [[[elements firstChildWithClassName:@"yt-lockup-content"] firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
+             ;
+             self.video.time = [[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"].text;
+             self.video.poster = [[[[[[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"a"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"img"] objectForKey:@"src"];
              
-             NSString *time = [[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithTagName:@"span"].text;
-             
-             NSString *poster = [[[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"href"];
-             
-        //      NSString *descript = [[[elements firstChildWithClassName:@"yt-lockup-byline"]firstChildWithClassName:@"g-hovercard yt-uix-sessionlink yt-user-name  spf-link "] objectForKey:@"aria-label"];
+            //  NSString *descript = [[[[[[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"a"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"img"] objectForKey:@"src"];
              
       /*       self.news.title = [[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"].text;
              
@@ -94,10 +132,11 @@
              self.news.reference = [[[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"] objectForKey:@"href"];
              
              [self.newsContent addObject:self.news];*/
-             NSLog(@"%@", poster);
+       //     NSLog(@"%@", time);
+             [self.contentVideo addObject:self.video];
          }
          
-    //     [self.tableView reloadData];
+         [self.tableView reloadData];
     //     [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
          
      }
