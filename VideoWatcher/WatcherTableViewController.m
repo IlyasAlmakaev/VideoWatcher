@@ -81,6 +81,8 @@
              
              NSString *time = [[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithTagName:@"span"].text;
              
+             NSString *poster = [[[elements firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"href"];
+             
         //      NSString *descript = [[[elements firstChildWithClassName:@"yt-lockup-byline"]firstChildWithClassName:@"g-hovercard yt-uix-sessionlink yt-user-name  spf-link "] objectForKey:@"aria-label"];
              
       /*       self.news.title = [[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"].text;
@@ -92,7 +94,7 @@
              self.news.reference = [[[[element firstChildWithClassName:@"topic-header"] firstChildWithClassName:@"topic-title word-wrap"] firstChildWithTagName:@"a"] objectForKey:@"href"];
              
              [self.newsContent addObject:self.news];*/
-             NSLog(@"%@", time);
+             NSLog(@"%@", poster);
          }
          
     //     [self.tableView reloadData];
