@@ -14,11 +14,17 @@
 #import "WatcherTableViewCell.h"
 
 
-@interface WatcherTableViewController ()
+@interface WatcherTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 @property Video *video;
 @property (strong, nonatomic) AppDelegate *appD;
 @property (strong, nonatomic) NSMutableArray *contentVideo;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSNumberFormatter *decimalFormatter;
+@property (strong, nonatomic) NSArray *filteredList;
+@property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
+@property (strong, nonatomic) UISearchController *searchController;
 
 @end
 
@@ -29,7 +35,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
-    self.contentVideo = [[NSMutableArray alloc] init];
+        self.contentVideo = [[NSMutableArray alloc] init];
+        self.filteredList = [[NSArray alloc] init];
     }
     return self;
 }
@@ -38,6 +45,20 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Видео";
+    
+    
+    // No search results controller to display the search results in the current view
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    
+    self.searchController.searchBar.delegate = self;
+    
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    self.definesPresentationContext = YES;
+    
+    [self.searchController.searchBar sizeToFit];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WatcherTableViewCell" bundle:nil] forCellReuseIdentifier:@"id"];
     
@@ -62,7 +83,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.contentVideo.count;
+    if (self.searchController.active)
+    {
+        return [self.filteredList count];
+    }
+    else
+    {
+        return self.contentVideo.count;
+    }
+    
 }
 
 
@@ -74,7 +103,16 @@
         cell = [[WatcherTableViewCell alloc] init]; // or your custom initialization
     }
     
-    self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    if (self.searchController.active)
+    {
+        self.video = [self.filteredList objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    }
+    
+    
     
     [cell.nameCell setText:self.video.name];
     [cell.descriptCell setText:self.video.descript];
@@ -133,7 +171,6 @@
              
              self.video.name = [[[[elements firstChildWithClassName:@"yt-lockup-content"]firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"title"];
              self.video.descript = [[[elements firstChildWithClassName:@"yt-lockup-content"] firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
-             ;
              self.video.time = [[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"].text;
              self.video.poster = [[[[[[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"a"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"img"] objectForKey:@"src"];
              
@@ -162,6 +199,32 @@
      }];
     
     [operation start];
+}
+
+#pragma mark -
+#pragma mark === UISearchBarDelegate ===
+#pragma mark -
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    [self updateSearchResultsForSearchController:self.searchController];
+}
+
+#pragma mark -
+#pragma mark === UISearchResultsUpdating ===
+#pragma mark -
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSString *searchString = searchController.searchBar.text;
+    [self searchForText:searchString];
+    [self.tableView reloadData];
+}
+
+- (void)searchForText:(NSString *)searchText
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    self.filteredList = [self.contentVideo filteredArrayUsingPredicate:resultPredicate];
 }
 
 
