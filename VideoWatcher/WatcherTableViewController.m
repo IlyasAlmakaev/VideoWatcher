@@ -202,6 +202,38 @@
 }
 
 #pragma mark -
+#pragma mark === Accessors ===
+#pragma mark -
+
+- (NSNumberFormatter *)decimalFormatter
+{
+    if (!_decimalFormatter)
+    {
+        _decimalFormatter = [[NSNumberFormatter alloc] init];
+        [_decimalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    }
+    return _decimalFormatter;
+}
+
+- (NSFetchRequest *)searchFetchRequest
+{
+    if (_searchFetchRequest != nil)
+    {
+        return _searchFetchRequest;
+    }
+    
+    _searchFetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Video" inManagedObjectContext:self.managedObjectContext];
+    [_searchFetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    [_searchFetchRequest setSortDescriptors:sortDescriptors];
+    
+    return _searchFetchRequest;
+}
+
+#pragma mark -
 #pragma mark === UISearchBarDelegate ===
 #pragma mark -
 
@@ -223,7 +255,9 @@
 
 - (void)searchForText:(NSString *)searchText
 {
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    NSString *predicateFormat = @"%K BEGINSWITH[cd] %@";
+    NSString *searchAttribute = @"name";
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, searchText];
     self.filteredList = [self.contentVideo filteredArrayUsingPredicate:resultPredicate];
 }
 
