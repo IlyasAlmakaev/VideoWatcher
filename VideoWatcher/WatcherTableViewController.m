@@ -102,8 +102,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  //  WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
-    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idV"];
+    
+    
     
     if (self.searchController.active)
     {
@@ -116,25 +116,25 @@
     
     if ([self.video.select boolValue] == NO)
     {
-        XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
-        [videoPlayerViewController presentInView:cell.videoView];
-        [videoPlayerViewController.moviePlayer play];
-//        [cell.playerView loadWithVideoId:self.video.reference];
-        
-   /*     [cell.nameCell setText:self.video.name];
+        WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
+        [cell.nameCell setText:self.video.name];
         [cell.descriptCell setText:self.video.descript];
         [cell.timeCell setText:self.video.time];
         //    cell.timeCell.text = [self.news.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
         //   NSLog(@"%@", self.video.poster);
-        // Configure the cell...*/
+        // Configure the cell...
+        return cell;
     }
     else
     {
-        
-        
+        VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idV"];
+        XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
+        [videoPlayerViewController presentInView:cell.videoView];
+        [videoPlayerViewController.moviePlayer play];
+        return cell;
     }
-    return cell;
+    
 }
 
 
@@ -153,6 +153,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self.video.select boolValue] == NO)
+    return 147;
+    else
     return 294;
 }
 
