@@ -90,7 +90,7 @@
     // Return the number of rows in the section.
     if (self.searchController.active)
     {
-        return [self.filteredList count];
+        return self.filteredList.count;
     }
     else
     {
@@ -108,6 +108,7 @@
     if (self.searchController.active)
     {
         self.video = [self.filteredList objectAtIndex:indexPath.row];
+        self.video.select = [NSNumber numberWithBool:NO];
     }
     else
     {
@@ -117,6 +118,7 @@
     if ([self.video.select boolValue] == NO)
     {
         WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
+        
         [cell.nameCell setText:self.video.name];
         [cell.descriptCell setText:self.video.descript];
         [cell.timeCell setText:self.video.time];
@@ -124,14 +126,20 @@
         [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
         //   NSLog(@"%@", self.video.poster);
         // Configure the cell...
+        
         return cell;
     }
     else
     {
         VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idV"];
+        
         XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
         [videoPlayerViewController presentInView:cell.videoView];
         [videoPlayerViewController.moviePlayer play];
+        
+        [cell.name setText:self.video.name];
+        [cell.descript setText:self.video.descript];
+        
         return cell;
     }
     
@@ -144,9 +152,7 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     self.video = [self.contentVideo objectAtIndex:indexPath.row];
-    NSLog(@"%@", self.video);
     self.video.select = [NSNumber numberWithBool:YES];
     [tableView reloadData];
 }
@@ -156,7 +162,7 @@
     if ([self.video.select boolValue] == NO)
     return 147;
     else
-    return 294;
+    return 324;
 }
 
 - (void)parse

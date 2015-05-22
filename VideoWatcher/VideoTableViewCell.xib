@@ -6,24 +6,40 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="idV" selectionStyle="default" indentationWidth="10" reuseIdentifier="idV" rowHeight="294" id="KGk-i7-Jjw" customClass="VideoTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="294"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="idV" selectionStyle="default" indentationWidth="10" reuseIdentifier="idV" rowHeight="324" id="KGk-i7-Jjw" customClass="VideoTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="324"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="293"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="bYO-rF-Ji4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="243"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tS2-yR-mn6">
+                        <rect key="frame" x="8" y="242" width="304" height="51"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descript" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ZS-AO-dWN">
+                        <rect key="frame" x="8" y="294" width="304" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="descript" destination="1ZS-AO-dWN" id="AE5-n6-qtb"/>
+                <outlet property="name" destination="tS2-yR-mn6" id="J9K-R0-k8E"/>
                 <outlet property="videoView" destination="bYO-rF-Ji4" id="B1I-JO-apj"/>
             </connections>
-            <point key="canvasLocation" x="456" y="306"/>
+            <point key="canvasLocation" x="456" y="321"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
