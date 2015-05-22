@@ -20,14 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - HCYoutubeParser (0.0.2)
   - hpple (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
+  - HCYoutubeParser (~> 0.0.2)
   - hpple (~> 0.2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  HCYoutubeParser: cdfef410cd2ce6ee538a07ee4a1c9ed29069f544
   hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
 
 COCOAPODS: 0.37.1

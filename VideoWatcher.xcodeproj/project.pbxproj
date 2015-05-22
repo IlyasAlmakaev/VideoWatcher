@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11162B9CBB66FDF1C7C965B9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E121A0544C29D9EA47135A81 /* libPods.a */; };
-		6153C6071B09EDE60018FD43 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 6153C6061B09EDE60018FD43 /* Video.m */; };
+		11D44BA01B0E8F8100964ED4 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 11D44B9F1B0E8F8100964ED4 /* Video.m */; };
 		61E434B81B0998A7003F2C0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434B71B0998A7003F2C0D /* main.m */; };
 		61E434BB1B0998A7003F2C0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434BA1B0998A7003F2C0D /* AppDelegate.m */; };
 		61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61E434BC1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld */; };
@@ -35,8 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6153C6051B09EDE60018FD43 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
-		6153C6061B09EDE60018FD43 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		11D44B9E1B0E8F8100964ED4 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		11D44B9F1B0E8F8100964ED4 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
 		61E434B21B0998A7003F2C0D /* VideoWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E434B61B0998A7003F2C0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61E434B71B0998A7003F2C0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -122,8 +122,8 @@
 				61EBFAC71B0B460700AC5267 /* WatcherViewController.h */,
 				61EBFAC81B0B460700AC5267 /* WatcherViewController.m */,
 				61EBFAC91B0B460700AC5267 /* WatcherViewController.xib */,
-				6153C6051B09EDE60018FD43 /* Video.h */,
-				6153C6061B09EDE60018FD43 /* Video.m */,
+				11D44B9E1B0E8F8100964ED4 /* Video.h */,
+				11D44B9F1B0E8F8100964ED4 /* Video.m */,
 				61E434B51B0998A7003F2C0D /* Supporting Files */,
 			);
 			path = VideoWatcher;
@@ -310,9 +310,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				61E434BB1B0998A7003F2C0D /* AppDelegate.m in Sources */,
+				11D44BA01B0E8F8100964ED4 /* Video.m in Sources */,
 				61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */,
 				61E434B81B0998A7003F2C0D /* main.m in Sources */,
-				6153C6071B09EDE60018FD43 /* Video.m in Sources */,
 				61E434C11B0998A7003F2C0D /* ViewController.m in Sources */,
 				61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */,
 				61EBFAC51B0AF56400AC5267 /* WatcherTableViewCell.m in Sources */,

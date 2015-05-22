@@ -7,11 +7,14 @@
 //
 
 #import "WatcherTableViewController.h"
+#import "Video.h"
+#import "WatcherTableViewCell.h"
 #import "TFHpple.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
-#import "Video.h"
-#import "WatcherTableViewCell.h"
+#import "HCYoutubeParser.h"
+#import <MediaPlayer/MediaPlayer.h>
+
 
 
 @interface WatcherTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating>
@@ -112,16 +115,38 @@
         self.video = [self.contentVideo objectAtIndex:indexPath.row];
     }
     
-    
-    
-    [cell.nameCell setText:self.video.name];
-    [cell.descriptCell setText:self.video.descript];
-    [cell.timeCell setText:self.video.time];
-//    cell.timeCell.text = [self.news.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
- //   NSLog(@"%@", self.video.poster);
-    // Configure the cell...
-    
+    if ([self.video.select boolValue] == NO)
+    {
+        [cell.nameCell setText:self.video.name];
+        [cell.descriptCell setText:self.video.descript];
+        [cell.timeCell setText:self.video.time];
+        //    cell.timeCell.text = [self.news.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
+        //   NSLog(@"%@", self.video.poster);
+        // Configure the cell...
+    }
+    else
+    {
+        // Gets an dictionary with each available youtube url
+        NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com%@", self.video.reference]]];
+        
+        // Presents a MoviePlayerController with the youtube quality medium
+        MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
+ /*       [self presentModalViewController:mp animated:YES];
+        
+        // To get a thumbnail for an image there is now a async method for that
+        [HCYoutubeParser thumbnailForYoutubeURL:url
+                                  thumbnailSize:YouTubeThumbnailDefaultHighQuality
+                                  completeBlock:^(UIImage *image, NSError *error) {
+                                      if (!error) {
+                                          self.thumbailImageView.image = image;
+                                      }
+                                      else {
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+                                          [alert show];
+                                      }
+                                  }];*/
+    }
     return cell;
 }
 
@@ -130,15 +155,12 @@
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
- //   <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
- //   [self.navigationController pushViewController:detailViewController animated:YES];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    self.video.select = [NSNumber numberWithBool:YES];
+    [tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,7 +193,9 @@
              self.video.descript = [[[elements firstChildWithClassName:@"yt-lockup-content"] firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
              self.video.time = [[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"].text;
              self.video.poster = [[[[[[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"a"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"img"] objectForKey:@"src"];
-
+             self.video.reference = [[[[elements firstChildWithClassName:@"yt-lockup-content"]firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"href"];
+             self.video.select = [NSNumber numberWithBool:NO];
+             
              [self.contentVideo addObject:self.video];
          }
          [self.tableView reloadData];
@@ -247,14 +271,5 @@
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

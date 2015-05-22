@@ -2,7 +2,7 @@
 //  Video.h
 //  VideoWatcher
 //
-//  Created by almakaev iliyas on 18/05/15.
+//  Created by intent on 21/05/15.
 //  Copyright (c) 2015 almakaev iliyas. All rights reserved.
 //
 
@@ -16,5 +16,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * poster;
 @property (nonatomic, retain) NSString * time;
+@property (nonatomic, retain) NSNumber * select;
+@property (nonatomic, retain) NSString * reference;
 
 @end

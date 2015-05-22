@@ -2,7 +2,7 @@
 //  Video.m
 //  VideoWatcher
 //
-//  Created by almakaev iliyas on 18/05/15.
+//  Created by intent on 21/05/15.
 //  Copyright (c) 2015 almakaev iliyas. All rights reserved.
 //
 
@@ -15,5 +15,7 @@
 @dynamic name;
 @dynamic poster;
 @dynamic time;
+@dynamic select;
+@dynamic reference;
 
 @end
