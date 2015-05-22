@@ -9,12 +9,12 @@
 #import "WatcherTableViewController.h"
 #import "Video.h"
 #import "WatcherTableViewCell.h"
+#import "VideoTableViewCell.h"
 #import "TFHpple.h"
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
-#import "HCYoutubeParser.h"
-#import <MediaPlayer/MediaPlayer.h>
-
+#import "XCDYouTubeKit.h"
+#import "AppDelegate.h"
 
 
 @interface WatcherTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating>
@@ -65,6 +65,8 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WatcherTableViewCell" bundle:nil] forCellReuseIdentifier:@"id"];
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"VideoTableViewCell" bundle:nil] forCellReuseIdentifier:@"idV"];
+    
     self.appD = [[AppDelegate alloc] init];
     [self parse];
 }
@@ -99,12 +101,9 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
     
-    if (cell == nil)
-    {
-        cell = [[WatcherTableViewCell alloc] init]; // or your custom initialization
-    }
+  //  WatcherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
+    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idV"];
     
     if (self.searchController.active)
     {
@@ -117,35 +116,23 @@
     
     if ([self.video.select boolValue] == NO)
     {
-        [cell.nameCell setText:self.video.name];
+        XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
+        [videoPlayerViewController presentInView:cell.videoView];
+        [videoPlayerViewController.moviePlayer play];
+//        [cell.playerView loadWithVideoId:self.video.reference];
+        
+   /*     [cell.nameCell setText:self.video.name];
         [cell.descriptCell setText:self.video.descript];
         [cell.timeCell setText:self.video.time];
         //    cell.timeCell.text = [self.news.date stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
         //   NSLog(@"%@", self.video.poster);
-        // Configure the cell...
+        // Configure the cell...*/
     }
     else
     {
-        // Gets an dictionary with each available youtube url
-        NSDictionary *videos = [HCYoutubeParser h264videosWithYoutubeURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.youtube.com%@", self.video.reference]]];
         
-        // Presents a MoviePlayerController with the youtube quality medium
-        MPMoviePlayerViewController *mp = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:[videos objectForKey:@"medium"]]];
- /*       [self presentModalViewController:mp animated:YES];
         
-        // To get a thumbnail for an image there is now a async method for that
-        [HCYoutubeParser thumbnailForYoutubeURL:url
-                                  thumbnailSize:YouTubeThumbnailDefaultHighQuality
-                                  completeBlock:^(UIImage *image, NSError *error) {
-                                      if (!error) {
-                                          self.thumbailImageView.image = image;
-                                      }
-                                      else {
-                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-                                          [alert show];
-                                      }
-                                  }];*/
     }
     return cell;
 }
@@ -159,13 +146,14 @@
 {
 
     self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    NSLog(@"%@", self.video);
     self.video.select = [NSNumber numberWithBool:YES];
     [tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 147;
+    return 294;
 }
 
 - (void)parse
@@ -193,9 +181,9 @@
              self.video.descript = [[[elements firstChildWithClassName:@"yt-lockup-content"] firstChildWithClassName:@"yt-lockup-byline"] firstChildWithTagName:@"a"].text;
              self.video.time = [[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"].text;
              self.video.poster = [[[[[[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"] firstChildWithTagName:@"span"] firstChildWithTagName:@"a"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"span"] firstChildWithTagName:@"img"] objectForKey:@"src"];
-             self.video.reference = [[[[elements firstChildWithClassName:@"yt-lockup-content"]firstChildWithClassName:@"yt-lockup-title"] firstChildWithClassName:@"yt-uix-sessionlink yt-uix-tile-link  spf-link  yt-ui-ellipsis yt-ui-ellipsis-2"] objectForKey:@"href"];
+             self.video.reference = [[[[elements firstChildWithClassName:@"yt-lockup-thumbnail"]  firstChildWithTagName:@"span"]firstChildWithClassName:@"yt-uix-button yt-uix-button-size-small yt-uix-button-default yt-uix-button-empty yt-uix-button-has-icon no-icon-markup addto-button video-actions spf-nolink hide-until-delayloaded addto-watch-later-button-sign-in yt-uix-tooltip"] objectForKey:@"data-video-ids"];
              self.video.select = [NSNumber numberWithBool:NO];
-             
+             NSLog(@"%@", self.video.reference);
              [self.contentVideo addObject:self.video];
          }
          [self.tableView reloadData];

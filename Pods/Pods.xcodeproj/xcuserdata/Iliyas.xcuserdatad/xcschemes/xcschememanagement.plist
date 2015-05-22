@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-XCDYouTubeKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-hpple.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4B954E80E9A7376067CF862A</key>
+		<key>2AE4E0012E89233944604E54</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5AAC8A95C7C9EFC17F4F9962</key>
+		<key>B3CF1717D6D7D554BAA827C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>642E4335E77121C0388B3606</key>
+		<key>B42B8E650A3DFABADC350B1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BF2EAC4FC5C5173E64488FCD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

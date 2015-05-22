@@ -18,10 +18,11 @@
 		61E434D51B0998A7003F2C0D /* VideoWatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434D41B0998A7003F2C0D /* VideoWatcherTests.m */; };
 		61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E434DF1B099929003F2C0D /* WatcherTableViewController.m */; };
 		61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61E434E01B099929003F2C0D /* WatcherTableViewController.xib */; };
+		61E4F5321B0EF030007C95D4 /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E4F5301B0EF030007C95D4 /* VideoTableViewCell.m */; };
+		61E4F5331B0EF030007C95D4 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61E4F5311B0EF030007C95D4 /* VideoTableViewCell.xib */; };
+		61E4F5351B0F1881007C95D4 /* libPods-XCDYouTubeKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E4F5341B0F1881007C95D4 /* libPods-XCDYouTubeKit.a */; };
 		61EBFAC51B0AF56400AC5267 /* WatcherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */; };
 		61EBFAC61B0AF56400AC5267 /* WatcherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */; };
-		61EBFACA1B0B460700AC5267 /* WatcherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EBFAC81B0B460700AC5267 /* WatcherViewController.m */; };
-		61EBFACB1B0B460700AC5267 /* WatcherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61EBFAC91B0B460700AC5267 /* WatcherViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,12 +54,13 @@
 		61E434DE1B099929003F2C0D /* WatcherTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherTableViewController.h; sourceTree = "<group>"; };
 		61E434DF1B099929003F2C0D /* WatcherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherTableViewController.m; sourceTree = "<group>"; };
 		61E434E01B099929003F2C0D /* WatcherTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherTableViewController.xib; sourceTree = "<group>"; };
+		61E4F52F1B0EF030007C95D4 /* VideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewCell.h; sourceTree = "<group>"; };
+		61E4F5301B0EF030007C95D4 /* VideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewCell.m; sourceTree = "<group>"; };
+		61E4F5311B0EF030007C95D4 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
+		61E4F5341B0F1881007C95D4 /* libPods-XCDYouTubeKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-XCDYouTubeKit.a"; path = "Pods/../build/Debug-iphoneos/libPods-XCDYouTubeKit.a"; sourceTree = "<group>"; };
 		61EBFAC21B0AF56400AC5267 /* WatcherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherTableViewCell.h; sourceTree = "<group>"; };
 		61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherTableViewCell.m; sourceTree = "<group>"; };
 		61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherTableViewCell.xib; sourceTree = "<group>"; };
-		61EBFAC71B0B460700AC5267 /* WatcherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatcherViewController.h; sourceTree = "<group>"; };
-		61EBFAC81B0B460700AC5267 /* WatcherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatcherViewController.m; sourceTree = "<group>"; };
-		61EBFAC91B0B460700AC5267 /* WatcherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WatcherViewController.xib; sourceTree = "<group>"; };
 		6DBF4CBA066676DA831BFE1B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E121A0544C29D9EA47135A81 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6770D2D0739F7D2CD6D01D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E4F5351B0F1881007C95D4 /* libPods-XCDYouTubeKit.a in Frameworks */,
 				11162B9CBB66FDF1C7C965B9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,9 +122,9 @@
 				61EBFAC21B0AF56400AC5267 /* WatcherTableViewCell.h */,
 				61EBFAC31B0AF56400AC5267 /* WatcherTableViewCell.m */,
 				61EBFAC41B0AF56400AC5267 /* WatcherTableViewCell.xib */,
-				61EBFAC71B0B460700AC5267 /* WatcherViewController.h */,
-				61EBFAC81B0B460700AC5267 /* WatcherViewController.m */,
-				61EBFAC91B0B460700AC5267 /* WatcherViewController.xib */,
+				61E4F52F1B0EF030007C95D4 /* VideoTableViewCell.h */,
+				61E4F5301B0EF030007C95D4 /* VideoTableViewCell.m */,
+				61E4F5311B0EF030007C95D4 /* VideoTableViewCell.xib */,
 				11D44B9E1B0E8F8100964ED4 /* Video.h */,
 				11D44B9F1B0E8F8100964ED4 /* Video.m */,
 				61E434B51B0998A7003F2C0D /* Supporting Files */,
@@ -158,6 +161,7 @@
 		AE7AC243F3541C6C75EE8EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61E4F5341B0F1881007C95D4 /* libPods-XCDYouTubeKit.a */,
 				E121A0544C29D9EA47135A81 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -256,9 +260,9 @@
 			files = (
 				61E434C91B0998A7003F2C0D /* LaunchScreen.xib in Resources */,
 				61E434C61B0998A7003F2C0D /* Images.xcassets in Resources */,
-				61EBFACB1B0B460700AC5267 /* WatcherViewController.xib in Resources */,
 				61EBFAC61B0AF56400AC5267 /* WatcherTableViewCell.xib in Resources */,
 				61E434E21B099929003F2C0D /* WatcherTableViewController.xib in Resources */,
+				61E4F5331B0EF030007C95D4 /* VideoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61E4F5321B0EF030007C95D4 /* VideoTableViewCell.m in Sources */,
 				61E434BB1B0998A7003F2C0D /* AppDelegate.m in Sources */,
 				11D44BA01B0E8F8100964ED4 /* Video.m in Sources */,
 				61E434E11B099929003F2C0D /* WatcherTableViewController.m in Sources */,
@@ -316,7 +321,6 @@
 				61E434C11B0998A7003F2C0D /* ViewController.m in Sources */,
 				61E434BE1B0998A7003F2C0D /* VideoWatcher.xcdatamodeld in Sources */,
 				61EBFAC51B0AF56400AC5267 /* WatcherTableViewCell.m in Sources */,
-				61EBFACA1B0B460700AC5267 /* WatcherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +440,28 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VideoWatcher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				"OTHER_LDFLAGS[arch=*]" = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Pods-AFNetworking\"",
+					"-l\"Pods-hpple\"",
+					"-l\"xml2\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -447,7 +472,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VideoWatcher/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
