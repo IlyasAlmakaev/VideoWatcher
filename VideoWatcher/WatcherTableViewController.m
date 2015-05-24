@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 
 
-@interface WatcherTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating>
+@interface WatcherTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate>
 
 @property Video *video;
 @property (strong, nonatomic) AppDelegate *appD;
@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 @property (strong, nonatomic) UIView *customView;
+@property (nonatomic) CGRect *fixedFrame;
 
 @end
 
@@ -50,6 +51,11 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Видео";
+    
+    CGRect fixedFrame = self.customView.frame;
+    fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-230;
+    
+    self.customView.frame = fixedFrame;
     
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                            action:@selector(rightSwipe:)];
@@ -268,7 +274,13 @@
     self.video.select = [NSNumber numberWithBool:NO];
     [self.tableView reloadData];
     
-    self.customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , [[UIScreen mainScreen] bounds].size.height-230, 200, 150)];
+    float Height;
+    if (self.customView.frame.origin.y == 0)
+        Height = [[UIScreen mainScreen] bounds].size.height-230;
+    else
+    Height = self.customView.frame.origin.y;
+    
+    self.customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , Height, 200, 150)];
     
     [self.videoPlayerViewController presentInView:self.customView];
   
@@ -278,9 +290,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-CGRect fixedFrame = self.customView.frame;
-fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-166 + scrollView.contentOffset.y;
-self.customView.frame = fixedFrame;
+    CGRect fixedFrame = self.customView.frame;
+    fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-166 + scrollView.contentOffset.y;
+    self.customView.frame = fixedFrame;
 }
 
 /*
