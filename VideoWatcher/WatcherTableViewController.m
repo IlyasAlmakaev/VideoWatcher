@@ -51,12 +51,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Видео";
-    
-    CGRect fixedFrame = self.customView.frame;
-    fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-230;
-    
-    self.customView.frame = fixedFrame;
-    
+       
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                            action:@selector(rightSwipe:)];
     recognizer.delegate = self;
@@ -273,6 +268,8 @@
     }
     self.video.select = [NSNumber numberWithBool:NO];
     [self.tableView reloadData];
+    
+    [self.customView removeFromSuperview];
     
     float Height;
     if (self.customView.frame.origin.y == 0)
