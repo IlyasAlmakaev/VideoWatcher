@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
+@property (strong, nonatomic) UIView *customView;
 
 @end
 
@@ -267,11 +268,19 @@
     self.video.select = [NSNumber numberWithBool:NO];
     [self.tableView reloadData];
     
-    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210, [[UIScreen mainScreen] bounds].size.height-220, 200, 150)];
-    [self.videoPlayerViewController presentInView:customView];
+    self.customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , [[UIScreen mainScreen] bounds].size.height-230, 200, 150)];
+    
+    [self.videoPlayerViewController presentInView:self.customView];
   
     
-    [self.tableView addSubview:customView];
+    [self.tableView addSubview:self.customView];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+CGRect fixedFrame = self.customView.frame;
+fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-166 + scrollView.contentOffset.y;
+self.customView.frame = fixedFrame;
 }
 
 /*
