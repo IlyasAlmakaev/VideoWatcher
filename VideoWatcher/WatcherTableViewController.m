@@ -28,6 +28,7 @@
 @property (strong, nonatomic) NSArray *filteredList;
 @property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
 @property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 
 @end
 
@@ -140,9 +141,9 @@
     {
         VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idV"];
         
-        XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
-        [videoPlayerViewController presentInView:cell.videoView];
-        [videoPlayerViewController.moviePlayer play];
+        self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.video.reference];
+        [self.videoPlayerViewController presentInView:cell.videoView];
+        [self.videoPlayerViewController.moviePlayer play];
         
         [cell.name setText:self.video.name];
         [cell.descript setText:self.video.descript];
@@ -263,7 +264,14 @@
     {
         self.video = [self.contentVideo objectAtIndex:indexPath.row];
     }
-    NSLog(@"%@", self.video.name);
+    self.video.select = [NSNumber numberWithBool:NO];
+    [self.tableView reloadData];
+    
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210, [[UIScreen mainScreen] bounds].size.height-220, 200, 150)];
+    [self.videoPlayerViewController presentInView:customView];
+  
+    
+    [self.tableView addSubview:customView];
 }
 
 /*
