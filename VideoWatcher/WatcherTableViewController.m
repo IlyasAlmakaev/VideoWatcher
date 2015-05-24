@@ -31,6 +31,7 @@
 @property (strong, nonatomic) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 @property (strong, nonatomic) UIView *customView;
 @property (nonatomic) CGRect *fixedFrame;
+@property (strong, nonatomic) UISwipeGestureRecognizer *recognizerView;
 
 @end
 
@@ -54,9 +55,12 @@
        
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                            action:@selector(rightSwipe:)];
-    recognizer.delegate = self;
+    
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [self.tableView addGestureRecognizer:recognizer];
+    recognizer.delegate = self;
+    
+
     
     // No search results controller to display the search results in the current view
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -109,11 +113,8 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (self.searchController.active)
     {
         self.video = [self.filteredList objectAtIndex:indexPath.row];
@@ -283,6 +284,26 @@
   
     
     [self.tableView addSubview:self.customView];
+    
+    [self LoadLeftSwipe];
+    
+}
+
+- (void)LoadLeftSwipe
+{
+    self.recognizerView = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                    action:@selector(leftSwipe:)];
+    
+    
+    [self.recognizerView setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.customView addGestureRecognizer:self.recognizerView];
+    self.recognizerView.delegate = self;
+}
+
+- (void)leftSwipe:(UISwipeGestureRecognizer *)gestureRecognizer
+{
+    [self.customView removeFromSuperview];
+    [self.videoPlayerViewController.moviePlayer stop];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
