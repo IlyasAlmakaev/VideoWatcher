@@ -127,6 +127,7 @@
         [cell.imageCell setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http:%@",self.video.poster]]];
         //   NSLog(@"%@", self.video.poster);
         // Configure the cell...
+        tableView.rowHeight = 147;
         
         return cell;
     }
@@ -140,7 +141,9 @@
         
         [cell.name setText:self.video.name];
         [cell.descript setText:self.video.descript];
+        self.video.select = [NSNumber numberWithBool:NO];
         
+        tableView.rowHeight = 324;
         return cell;
     }
     
@@ -156,23 +159,23 @@
     if (self.searchController.active)
     {
         self.video = [self.filteredList objectAtIndex:indexPath.row];
-        //      self.video.select = [NSNumber numberWithBool:NO];
     }
     else
     {
         self.video = [self.contentVideo objectAtIndex:indexPath.row];
     }
+    
     self.video.select = [NSNumber numberWithBool:YES];
     [tableView reloadData];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.video.select boolValue] == NO)
     return 147;
     else
     return 324;
-}
+}*/
 
 - (void)parse
 {
