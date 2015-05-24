@@ -49,6 +49,11 @@
     
     self.navigationItem.title = @"Видео";
     
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                           action:@selector(rightSwipe:)];
+    recognizer.delegate = self;
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.tableView addGestureRecognizer:recognizer];
     
     // No search results controller to display the search results in the current view
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -245,6 +250,21 @@
     self.filteredList = [self.contentVideo filteredArrayUsingPredicate:resultPredicate];
 }
 
+- (void)rightSwipe:(UISwipeGestureRecognizer *)gestureRecognizer
+{
+    //do you right swipe stuff here. Something usually using theindexPath that you get that way
+    CGPoint location = [gestureRecognizer locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    if (self.searchController.active)
+    {
+        self.video = [self.filteredList objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        self.video = [self.contentVideo objectAtIndex:indexPath.row];
+    }
+    NSLog(@"%@", self.video.name);
+}
 
 /*
 // Override to support conditional editing of the table view.
