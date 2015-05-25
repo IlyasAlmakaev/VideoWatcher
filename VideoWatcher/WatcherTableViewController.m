@@ -269,8 +269,7 @@
     {
         self.video = [self.contentVideo objectAtIndex:self.indexPath.row];
     }
-    self.video.select = [NSNumber numberWithBool:NO];
-    [self.tableView reloadData];
+    
     
     [self.customView removeFromSuperview];
     
@@ -290,13 +289,14 @@
     
 
     heightOriginal = rectOfCellInSuperview.origin.y + self.heightOriginal;
-    [UIView animateWithDuration:10
+    
+    self.customView = [[UIView alloc] initWithFrame:CGRectMake(rectOfCellInSuperview.origin.x, heightOriginal, 320, 243)];
+    CGRect newRect = CGRectMake([[UIScreen mainScreen] bounds].size.width - 210 , height, 200, 150);
+    
+    [UIView animateWithDuration:0.2
                      animations:^{
-                         self.customView = [[UIView alloc] initWithFrame:CGRectMake(rectOfCellInSuperview.origin.x, heightOriginal, 320, 243)];
-                         //       self.customView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.5, 0.5);
-                         CGRect newRect = CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , height, 200, 150);
-
-                         self.customView.frame = newRect;}];
+                         self.customView.frame = newRect;
+                     }];
                          
     
     [self.videoPlayerViewController presentInView:self.customView];
@@ -305,6 +305,8 @@
     [self.tableView addSubview:self.customView];
     
     [self LoadLeftSwipe];
+    self.video.select = [NSNumber numberWithBool:NO];
+    [self.tableView reloadData];
     
 }
 
@@ -321,8 +323,11 @@
 
 - (void)leftSwipe:(UISwipeGestureRecognizer *)gestureRecognizer
 {
-    [self.customView removeFromSuperview];
-    [self.videoPlayerViewController.moviePlayer stop];
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         self.customView.frame = CGRectOffset(self.customView.frame, - [[UIScreen mainScreen] bounds].size.width, 0);
+                         [self.videoPlayerViewController.moviePlayer stop];
+                     }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -331,14 +336,6 @@
     fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-166 + scrollView.contentOffset.y;
     self.customView.frame = fixedFrame;
     self.heightOriginal = scrollView.contentOffset.y;
-    
- /*   CGRect rectOfCellInTableView = [self.tableView rectForRowAtIndexPath:self.indexPath];
-    CGRect rectOfCellInSuperview = [self.tableView convertRect:rectOfCellInTableView toView:[self.tableView superview]];
-    
-   // CGRect fixedFrameOriginal = rectOfCellInSuperview;
-  //  fixedFrameOriginal.origin.y = rectOfCellInSuperview.origin.y-60 + scrollView.contentOffset.y;
-    self.heightOriginal = rectOfCellInSuperview.origin.y-60 - scrollView.contentOffset.y;
-    NSLog(@"%f", self.heightOriginal);*/
 }
 
 /*
