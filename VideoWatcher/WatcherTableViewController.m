@@ -32,6 +32,8 @@
 @property (strong, nonatomic) UIView *customView;
 @property (nonatomic) CGRect *fixedFrame;
 @property (strong, nonatomic) UISwipeGestureRecognizer *recognizerView;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property float heightOriginal;
 
 @end
 
@@ -258,27 +260,44 @@
 {
     //do you right swipe stuff here. Something usually using theindexPath that you get that way
     CGPoint location = [gestureRecognizer locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    self.indexPath = [self.tableView indexPathForRowAtPoint:location];
     if (self.searchController.active)
     {
-        self.video = [self.filteredList objectAtIndex:indexPath.row];
+        self.video = [self.filteredList objectAtIndex:self.indexPath.row];
     }
     else
     {
-        self.video = [self.contentVideo objectAtIndex:indexPath.row];
+        self.video = [self.contentVideo objectAtIndex:self.indexPath.row];
     }
     self.video.select = [NSNumber numberWithBool:NO];
     [self.tableView reloadData];
     
     [self.customView removeFromSuperview];
     
-    float Height;
-    if (self.customView.frame.origin.y == 0)
-        Height = [[UIScreen mainScreen] bounds].size.height-230;
-    else
-    Height = self.customView.frame.origin.y;
+    CGRect rectOfCellInTableView = [self.tableView rectForRowAtIndexPath:self.indexPath];
+    CGRect rectOfCellInSuperview = [self.tableView convertRect:rectOfCellInTableView toView:[self.tableView superview]];
     
-    self.customView = [[UIView alloc] initWithFrame:CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , Height, 200, 150)];
+    float height;
+    float heightOriginal;
+    if (self.customView.frame.origin.y == 0)
+    {
+        height = [[UIScreen mainScreen] bounds].size.height-230;
+    }
+    else
+    {
+        height = self.customView.frame.origin.y;
+    }
+    
+
+    heightOriginal = rectOfCellInSuperview.origin.y + self.heightOriginal;
+    [UIView animateWithDuration:10
+                     animations:^{
+                         self.customView = [[UIView alloc] initWithFrame:CGRectMake(rectOfCellInSuperview.origin.x, heightOriginal, 320, 243)];
+                         //       self.customView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.5, 0.5);
+                         CGRect newRect = CGRectMake([[UIScreen mainScreen] bounds].size.width-210 , height, 200, 150);
+
+                         self.customView.frame = newRect;}];
+                         
     
     [self.videoPlayerViewController presentInView:self.customView];
   
@@ -311,6 +330,15 @@
     CGRect fixedFrame = self.customView.frame;
     fixedFrame.origin.y = [[UIScreen mainScreen] bounds].size.height-166 + scrollView.contentOffset.y;
     self.customView.frame = fixedFrame;
+    self.heightOriginal = scrollView.contentOffset.y;
+    
+ /*   CGRect rectOfCellInTableView = [self.tableView rectForRowAtIndexPath:self.indexPath];
+    CGRect rectOfCellInSuperview = [self.tableView convertRect:rectOfCellInTableView toView:[self.tableView superview]];
+    
+   // CGRect fixedFrameOriginal = rectOfCellInSuperview;
+  //  fixedFrameOriginal.origin.y = rectOfCellInSuperview.origin.y-60 + scrollView.contentOffset.y;
+    self.heightOriginal = rectOfCellInSuperview.origin.y-60 - scrollView.contentOffset.y;
+    NSLog(@"%f", self.heightOriginal);*/
 }
 
 /*
