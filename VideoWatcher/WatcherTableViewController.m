@@ -35,6 +35,9 @@
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property float heightOriginal;
 
+@property (strong, nonatomic) NSDictionary *posts;
+@property (strong, nonatomic) NSMutableArray *post;
+
 @end
 
 @implementation WatcherTableViewController
@@ -70,6 +73,7 @@
     self.searchController.dimsBackgroundDuringPresentation = NO;
     
     self.searchController.searchBar.delegate = self;
+    self.searchController.searchBar.placeholder = @"Поиск из популярного видео";
     
     self.tableView.tableHeaderView = self.searchController.searchBar;
     
@@ -226,6 +230,13 @@
      }];
     
     [operation start];
+    
+  /*  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"https://www.googleapis.com/youtube/v3/videos" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];*/
 }
 
 #pragma mark -
